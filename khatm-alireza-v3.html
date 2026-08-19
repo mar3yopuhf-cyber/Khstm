@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ختم قرآن، فاتحه و صلوات | به یاد علیرضا محمدرضایی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#f2a71c;
+    --gold-text:#241c07;
+    --navy:#12143a;
+    --navy-2:#1a1d4d;
+    --red:#e2445c;
+    --ink:#20200f;
+    --dim:#8a8272;
+    --line:#eee;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#fff;
+    font-family:'Vazirmatn', sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--navy);
+    color:#fff;
+    text-align:center;
+    padding:26px 18px;
+  }
+  .hero .name{
+    font-family:'Noto Naskh Arabic', serif;
+    font-size:20px;
+    margin:0 0 10px;
+    color:#f1e6c6;
+  }
+  .hero .stat{
+    font-size:15px;
+    color:#cfcbe8;
+  }
+  .hero .stat b{
+    color:var(--gold);
+    font-size:17px;
+  }
+  .hero button{
+    margin-top:14px;
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    border-radius:999px;
+    padding:8px 18px;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .hero button:hover{background:var(--gold); color:var(--gold-text);}
+
+  /* ---------- salawat/fatiha card ---------- */
+  .sf-card{
+    margin:22px 16px;
+    background:linear-gradient(180deg, var(--navy-2), var(--navy));
+    border-radius:16px;
+    padding:0 0 22px;
+    overflow:hidden;
+    color:#fff;
+  }
+  .arch{display:block; width:100%; height:auto;}
+  .sf-title{
+    text-align:center;
+    font-family:'Noto Naskh Arabic', serif;
+    font-size:24px;
+    margin:-8px 0 18px;
+    color:#fff;
+  }
+  .sf-row{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--gold);
+    color:var(--gold-text);
+    border-radius:10px;
+    margin:0 18px 10px;
+    padding:12px 16px;
+    font-size:15px;
+  }
+  .sf-row b{font-variant-numeric:tabular-nums; font-size:16px;}
+  .sf-note{
+    font-size:13px;
+    color:#c8c4e0;
+    text-align:center;
+    padding:8px 22px 14px;
+    line-height:1.9;
+  }
+  .slider-block{margin:0 18px 12px;}
+  input[type=range]{
+    width:100%;
+    -webkit-appearance:none;
+    height:4px;
+    border-radius:2px;
+    background:#4a4d7a;
+    margin-bottom:10px;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:#3f8dff;
+    border:3px solid #fff;
+    cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:20px;height:20px;
+    border-radius:50%;
+    background:#3f8dff;
+    border:3px solid #fff;
+    cursor:pointer;
+  }
+  .pledge-btn{
+    display:flex; justify-content:space-between; align-items:center;
+    width:100%;
+    background:var(--gold);
+    color:var(--gold-text);
+    border:none;
+    border-radius:10px;
+    padding:13px 16px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .pledge-btn:hover{filter:brightness(1.05);}
+  .pledge-btn .qty{font-variant-numeric:tabular-nums;}
+
+  /* ---------- section heading ---------- */
+  .section-heading{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:10px;
+    padding:26px 20px 14px;
+  }
+  .section-heading h2{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+  }
+  .section-heading .bar{
+    width:4px; height:24px;
+    background:var(--gold);
+    border-radius:2px;
+  }
+
+  /* ---------- list ---------- */
+  .list{padding:0 12px;}
+  .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:15px 18px;
+    background:var(--gold);
+    color:var(--gold-text);
+    border-radius:8px;
+    margin-bottom:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:background .2s ease, filter .2s ease;
+  }
+  .row:hover{filter:brightness(1.04);}
+  .row.active{background:#3d2e86; color:#fff;}
+  .row .num{
+    font-variant-numeric:tabular-nums;
+    min-width:56px;
+    font-size:14.5px;
+    font-weight:600;
+  }
+  .row .title{
+    flex:1;
+    text-align:right;
+    font-weight:500;
+  }
+  .row .chev{font-size:14px; opacity:.8;}
+
+  footer{
+    text-align:center;
+    color:var(--dim);
+    font-size:12px;
+    padding:30px 18px 44px;
+  }
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:38px 16px;
+    z-index:50;
+    overflow-y:auto;
+  }
+  .overlay.show{display:flex;}
+  .modal{
+    background:#fff;
+    color:var(--ink);
+    width:100%;
+    max-width:420px;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+  }
+  .modal-head{
+    position:relative;
+    padding:20px 20px 14px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .modal-head h2{
+    margin:0;
+    font-family:'Noto Naskh Arabic', serif;
+    font-size:22px;
+    font-weight:700;
+  }
+  .modal-close{
+    position:absolute;
+    top:14px; left:16px;
+    background:none;
+    border:none;
+    font-size:20px;
+    color:#999;
+    cursor:pointer;
+    line-height:1;
+    padding:4px;
+  }
+  .modal-close:hover{color:#333;}
+  .modal-body{padding:18px 20px 8px;}
+  .field-label{
+    font-size:13.5px;
+    color:var(--dim);
+    margin-bottom:8px;
+    text-align:right;
+  }
+  select.reciter{
+    width:100%;
+    appearance:none;
+    -webkit-appearance:none;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="14" viewBox="0 0 10 14"><path d="M5 0L9 5H1z" fill="%23999"/><path d="M5 14L1 9H9z" fill="%23999"/></svg>') left 14px center no-repeat;
+    margin-bottom:16px;
+    text-align:right;
+  }
+  audio{width:100%; margin-bottom:6px;}
+  .audio-fallback{
+    display:none;
+    font-size:13px;
+    color:var(--dim);
+    text-align:center;
+    margin-bottom:14px;
+  }
+  .audio-fallback.show{display:block;}
+  .audio-fallback a{
+    color:#1a63d1;
+    font-weight:600;
+    text-decoration:none;
+  }
+  .audio-fallback a:hover{text-decoration:underline;}
+  .dua-text{
+    font-family:'Noto Naskh Arabic', serif;
+    font-size:15.5px;
+    line-height:2.2;
+    color:#3a3527;
+    background:#f8f6f0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:10px;
+    text-align:center;
+  }
+  .dua-hint{
+    font-size:12.5px;
+    color:var(--dim);
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .modal-actions{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:14px 20px 20px;
+  }
+  .btn{
+    flex:1;
+    border:none;
+    border-radius:10px;
+    padding:13px 10px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn-gold{background:var(--gold); color:var(--gold-text);}
+  .btn-gold:hover{filter:brightness(1.05);}
+  .btn-red{background:var(--red); color:#fff;}
+  .btn-red:hover{filter:brightness(1.05);}
+  .btn:active{transform:scale(.97);}
+
+  .toast{
+    position:fixed;
+    bottom:22px; left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--gold);
+    color:var(--gold-text);
+    padding:11px 22px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:600;
+    opacity:0;
+    pointer-events:none;
+    transition:all .35s ease;
+    white-space:nowrap;
+    z-index:60;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){ *{transition-duration:.01ms !important;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="name">به یاد علیرضا محمدرضایی</div>
+    <div class="stat">تعداد ختم‌های انجام‌شده: <b id="khatmCount">۰</b> بار</div>
+    <button id="btnKhatm">یک ختم کامل ثبت کردم</button>
+  </div>
+
+  <div class="sf-card">
+    <svg class="arch" viewBox="0 0 400 90" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="archGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f2a71c"/>
+          <stop offset="1" stop-color="#8a6a15"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,90 L0,40 Q100,-10 200,10 Q300,-10 400,40 L400,90 Z" fill="url(#archGrad)" opacity="0.18"/>
+      <path d="M150,90 L150,45 Q200,15 250,45 L250,90 Z" fill="none" stroke="url(#archGrad)" stroke-width="2"/>
+    </svg>
+    <div class="sf-title">صلوات و فاتحه</div>
+
+    <div class="sf-row"><span>صلوات</span><b id="sumSalawat">۰</b></div>
+    <div class="sf-row"><span>قرائت حمد و سوره</span><b id="sumFatiha">۰</b></div>
+
+    <p class="sf-note">جهت تقبل صلوات و فاتحه به تعداد دلخواه از نوار‌های پایین استفاده کنید.</p>
+
+    <div class="slider-block">
+      <input type="range" id="rangeSalawat" min="1" max="1000" value="100">
+      <button class="pledge-btn" id="btnSalawat">
+        <span class="qty">تعداد <span id="qtySalawat">۱۰۰</span></span>
+        <span>صلوات تقبل می‌کنم</span>
+      </button>
+    </div>
+
+    <div class="slider-block">
+      <input type="range" id="rangeFatiha" min="1" max="200" value="10">
+      <button class="pledge-btn" id="btnFatiha">
+        <span class="qty">تعداد <span id="qtyFatiha">۱۰</span></span>
+        <span>فاتحه تقبل می‌کنم</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <h2>ادعیه و زیارات</h2>
+    <div class="bar"></div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <footer>ثواب این صفحه، هدیه به روح علیرضا محمدرضایی 🌿</footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <button class="modal-close" id="closeX" aria-label="بستن">×</button>
+      <h2 id="modalTitle">—</h2>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-gold" id="btnKhandam">خواندم 🤲</button>
+      <button class="btn btn-red" id="btnClose">بستن</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const NS = 'khatm-alireza-mohammadrezaei-v3';
+  const BASE = 'https://ia801406.us.archive.org/12/items/002_20221103_202211/';
+
+  const ITEMS = [
+    { id:'ashura',  title:'زیارت عاشورا', type:'dua', excerpt:true,
+      text:'اَلسَّلامُ عَلَیْکَ یا اَبا عَبْدِاللَّهِ، اَلسَّلامُ عَلَیْکَ یَا بْنَ رَسُولِ اللَّهِ، اَلسَّلامُ عَلَیْکَ یا خِیَرَةَ اللَّهِ وَابْنَ خِیَرَتِهِ، اَلسَّلامُ عَلَیْکَ یَا بْنَ اَمیرِ الْمُؤْمِنینَ وَ ابْنَ سَیِّدِ الْوَصِیّینَ، اَلسَّلامُ عَلَیْکَ یَا بْنَ فاطِمَةَ سَیِّدَةِ نِساءِ الْعالَمینَ، اَلسَّلامُ عَلَیْکَ یا ثارَ اللَّهِ وَابْنَ ثارِهِ وَالْوِتْرَ الْمَوْتُورَ.',
+      link:'https://fa.wikishia.net/view/%D8%B2%DB%8C%D8%A7%D8%B1%D8%AA_%D8%B9%D8%A7%D8%B4%D9%88%D8%B1%D8%A7',
+      hint:'ثواب زیارت عاشورا هدیه به روح علیرضا محمدرضایی' },
+    { id:'kursi',   title:'آیة الکرسی', type:'dua',
+      text:'اَللَّهُ لَا إِلَـٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ کُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ',
+      hint:'ثواب خواندن آیة الکرسی هدیه به روح علیرضا محمدرضایی' },
+    { id:'mujir',   title:'دعای مجیر', type:'dua', excerpt:true,
+      text:'سُبْحانَکَ یا اَللَّهُ، تَعالَیْتَ یا رَحْمنُ، اَجِرْنا مِنَ النّارِ یا مُجیرُ. سُبْحانَکَ یا رَحیمُ، تَعالَیْتَ یا کَریمُ، اَجِرْنا مِنَ النّارِ یا مُجیرُ. سُبْحانَکَ یا مَلِکُ، تَعالَیْتَ یا مالِکُ، اَجِرْنا مِنَ النّارِ یا مُجیرُ. سُبْحانَکَ یا قُدُّوسُ، تَعالَیْتَ یا سَلامُ، اَجِرْنا مِنَ النّارِ یا مُجیرُ. سُبْحانَکَ یا مُؤْمِنُ، تَعالَیْتَ یا مُهَیْمِنُ، اَجِرْنا مِنَ النّارِ یا مُجیرُ.',
+      link:'https://fa.wikishia.net/view/%D8%AF%D8%B9%D8%A7%DB%8C_%D9%85%D8%AC%DB%8C%D8%B1',
+      hint:'ثواب دعای مجیر هدیه به روح علیرضا محمدرضایی' },
+    { id:'saffat',  title:'سوره صافات', type:'quran', surah:37, reciter:'احمد الشافعی',
+      src:'https://archive.org/download/ahmed_alshafey_202211/037.mp3' },
+    { id:'rahman',  title:'سوره الرحمن', type:'quran', surah:55, reciter:'اسلام صبحی' },
+    { id:'yasin',   title:'سوره یاسین', type:'quran', surah:36, reciter:'اسلام صبحی' },
+    { id:'qadr',    title:'سوره قدر',   type:'quran', surah:97, reciter:'اسلام صبحی' },
+    { id:'waqiah',  title:'سوره واقعه', type:'quran', surah:56, reciter:'اسلام صبحی' },
+    { id:'ahd',     title:'دعای عهد',   type:'dua', excerpt:true,
+      text:'اَللّٰهُمَّ رَبَّ النُّورِ الْعَظیمِ، وَرَبَّ الْکُرْسِیِّ الرَّفیعِ، وَرَبَّ الْبَحْرِ الْمَسْجُورِ، وَمُنْزِلَ التَّوْراةِ وَالْإِنْجیلِ وَالزَّبُورِ وَالْفُرْقانِ الْعَظیمِ، وَرَبَّ الظِّلِّ وَالْحَرُورِ، وَمُنْزِلَ الْقُرْآنِ الْعَظیمِ، وَرَبَّ الْمَلائِکَةِ الْمُقَرَّبینَ، وَالْأَنْبِیاءِ وَالْمُرْسَلینَ.',
+      link:'https://fa.wikishia.net/view/%D8%AF%D8%B9%D8%A7%DB%8C_%D8%B9%D9%87%D8%AF',
+      hint:'ثواب دعای عهد هدیه به روح علیرضا محمدرضایی' },
+    { id:'nudba',   title:'دعای ندبه', type:'dua', excerpt:true,
+      text:'اَلْحَمْدُ لِلَّهِ رَبِّ الْعالَمینَ، وَصَلَّی اللَّهُ عَلَی سَیِّدِنا مُحَمَّدٍ نَبِیِّهِ وَآلِهِ وَسَلَّمَ تَسْلیماً. اَللَّهُمَّ لَکَ الْحَمْدُ عَلی ما جَری بِهِ قَضاؤُکَ فی اَوْلِیائِکَ الَّذینَ اسْتَخْلَصْتَهُمْ لِنَفْسِکَ وَدینِکَ.',
+      link:'https://fa.wikishia.net/view/%D8%AF%D8%B9%D8%A7%DB%8C_%D9%86%D8%AF%D8%A8%D9%87',
+      hint:'ثواب دعای ندبه هدیه به روح علیرضا محمدرضایی' },
+    { id:'mulk',    title:'سوره ملک',   type:'quran', surah:67, reciter:'اسلام صبحی' },
+  ];
+
+  const listEl = document.getElementById('list');
+  const overlay = document.getElementById('overlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const btnKhandam = document.getElementById('btnKhandam');
+  const btnClose = document.getElementById('btnClose');
+  const closeX = document.getElementById('closeX');
+  const toastEl = document.getElementById('toast');
+
+  let currentItem = null;
+  let rowEls = {};
+
+  function fmt(n){ return n.toLocaleString('fa-IR'); }
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastEl._t);
+    toastEl._t = setTimeout(()=>toastEl.classList.remove('show'), 2200);
+  }
+
+  async function getVal(key){
+    try{
+      const r = await window.storage.get(NS + ':' + key, true);
+      return r ? parseInt(r.value, 10) || 0 : 0;
+    }catch(e){ return 0; }
+  }
+  async function setVal(key, val){
+    try{ await window.storage.set(NS + ':' + key, String(val), true); }catch(e){}
+  }
+  async function addVal(key, amount){
+    const cur = await getVal(key);
+    const next = cur + amount;
+    await setVal(key, next);
+    return next;
+  }
+
+  /* ---------- hero khatm counter ---------- */
+  async function initKhatm(){
+    const el = document.getElementById('khatmCount');
+    el.textContent = fmt(await getVal('khatm-count'));
+    document.getElementById('btnKhatm').addEventListener('click', async ()=>{
+      const next = await addVal('khatm-count', 1);
+      el.textContent = fmt(next);
+      toast('یک ختم کامل ثبت شد، خدا قبول کند 🤍');
+    });
+  }
+
+  /* ---------- salawat / fatiha pledge card ---------- */
+  async function initPledge(){
+    const sumSalawatEl = document.getElementById('sumSalawat');
+    const sumFatihaEl = document.getElementById('sumFatiha');
+    sumSalawatEl.textContent = fmt(await getVal('sum-salawat'));
+    sumFatihaEl.textContent = fmt(await getVal('sum-fatiha'));
+
+    const rangeSalawat = document.getElementById('rangeSalawat');
+    const qtySalawat = document.getElementById('qtySalawat');
+    rangeSalawat.addEventListener('input', ()=>{ qtySalawat.textContent = fmt(parseInt(rangeSalawat.value,10)); });
+    document.getElementById('btnSalawat').addEventListener('click', async ()=>{
+      const amount = parseInt(rangeSalawat.value, 10);
+      const next = await addVal('sum-salawat', amount);
+      sumSalawatEl.textContent = fmt(next);
+      toast(fmt(amount) + ' صلوات ثبت شد 🌙');
+    });
+
+    const rangeFatiha = document.getElementById('rangeFatiha');
+    const qtyFatiha = document.getElementById('qtyFatiha');
+    rangeFatiha.addEventListener('input', ()=>{ qtyFatiha.textContent = fmt(parseInt(rangeFatiha.value,10)); });
+    document.getElementById('btnFatiha').addEventListener('click', async ()=>{
+      const amount = parseInt(rangeFatiha.value, 10);
+      const next = await addVal('sum-fatiha', amount);
+      sumFatihaEl.textContent = fmt(next);
+      toast(fmt(amount) + ' فاتحه ثبت شد 🤍');
+    });
+  }
+
+  /* ---------- list + modal ---------- */
+  async function renderList(){
+    listEl.innerHTML = '';
+    for(const item of ITEMS){
+      const c = await getVal('item:' + item.id);
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML =
+        '<span class="chev">&laquo;</span>' +
+        '<span class="title">' + item.title + '</span>' +
+        '<span class="num" id="num-' + item.id + '">' + fmt(c) + '</span>';
+      row.addEventListener('click', ()=>openModal(item, row));
+      listEl.appendChild(row);
+      rowEls[item.id] = row;
+    }
+  }
+
+  function openModal(item, rowEl){
+    currentItem = item;
+    Object.values(rowEls).forEach(r=>r.classList.remove('active'));
+    rowEl.classList.add('active');
+    modalTitle.textContent = item.title;
+
+    if(item.type === 'quran'){
+      const src = item.src || (BASE + String(item.surah).padStart(3,'0') + '.mp3');
+      modalBody.innerHTML =
+        '<div class="field-label">مداح</div>' +
+        '<select class="reciter"><option>' + item.title + ' با صدای ' + item.reciter + '</option></select>' +
+        '<audio controls preload="none" id="modalAudio"><source src="' + src + '" type="audio/mpeg"></audio>' +
+        '<div class="audio-fallback" id="audioFallback">' +
+          'اگر پخش آنلاین کار نکرد: ' +
+          '<a href="' + src + '" target="_blank" rel="noopener">شنیدن / دانلود در تب جدید</a>' +
+        '</div>';
+      const audioEl = modalBody.querySelector('#modalAudio');
+      const fallbackEl = modalBody.querySelector('#audioFallback');
+      audioEl.addEventListener('error', ()=>{ fallbackEl.classList.add('show'); });
+      fallbackEl.classList.add('show');
+    } else {
+      modalBody.innerHTML =
+        '<div class="field-label">متن دعا</div>' +
+        '<div class="dua-text">' + item.text + '</div>' +
+        '<div class="dua-hint">' + (item.hint || '') + '</div>';
+    }
+    overlay.classList.add('show');
+  }
+
+  function closeModal(){
+    overlay.classList.remove('show');
+    const audio = modalBody.querySelector('audio');
+    if(audio){ audio.pause(); }
+  }
+
+  btnClose.addEventListener('click', closeModal);
+  closeX.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+
+  btnKhandam.addEventListener('click', async ()=>{
+    if(!currentItem) return;
+    btnKhandam.disabled = true;
+    const next = await addVal('item:' + currentItem.id, 1);
+    const numEl = document.getElementById('num-' + currentItem.id);
+    if(numEl) numEl.textContent = fmt(next);
+    toast('سپاس، ثبت شد برای روح علیرضا محمدرضایی 🤍');
+    btnKhandam.disabled = false;
+    closeModal();
+  });
+
+  initKhatm();
+  initPledge();
+  renderList();
+})();
+</script>
+</body>
+</html>
